@@ -7,6 +7,10 @@ public class Main : MonoBehaviour {
     
     public int level = 0;
     public Text levelTexte;
+	public float couldown;
+	public float maxCouldown;
+	public float couldownSpeed;
+	public Slider couldownSlide;
 
     // Use this for initialization
     void Start () {
@@ -16,11 +20,18 @@ public class Main : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         levelTexte.text = ("Level: " + level);
+		couldownSlide.value = couldown;
+		if (couldown <= maxCouldown) {
+			couldown = couldown + couldownSpeed;
+		}
+		couldownSlide.maxValue = maxCouldown;
     }
     public void LevelAdd () {
-        level += 1;
-        
-        
+
+		if (couldown >= maxCouldown) {
+			level += 1;
+			couldown = 0;
+		}          
     }
     
 }
